@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Yis">
+      <UniqueIdentifier>{7A3B880B-E644-887C-6FC0-9E7CDBC8937C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Yis\Events">
+      <UniqueIdentifier>{1EFA6C51-0AB2-AE9E-73B9-87FA5F90498F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Yis.h" />
+    <ClInclude Include="src\Yis\Application.h">
+      <Filter>Yis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Core.h">
+      <Filter>Yis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\EntryPoint.h">
+      <Filter>Yis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Events\ApplicationEvent.h">
+      <Filter>Yis\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Events\Event.h">
+      <Filter>Yis\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Events\KeyEvent.h">
+      <Filter>Yis\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Events\MouseEvent.h">
+      <Filter>Yis\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Log.h">
+      <Filter>Yis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\yspch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Yis\Application.cpp">
+      <Filter>Yis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\Log.cpp">
+      <Filter>Yis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\yspch.cpp" />
+  </ItemGroup>
+</Project>
