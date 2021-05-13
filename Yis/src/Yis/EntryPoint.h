@@ -10,8 +10,6 @@ int main(int argc, char** argv)
 {
 	Yis::Log::Init();
 	YS_CORE_WARN("Initialized Log");
-	int a = 5;
-	YS_APP_INFO("Hello! Var ={0}", a);
 
 	auto app = Yis::CreateApplication();
 	app->Run();

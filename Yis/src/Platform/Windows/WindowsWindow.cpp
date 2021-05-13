@@ -1,5 +1,8 @@
 #include "yspch.h"
 #include "WindowsWindow.h"
+#include "Yis/Events/ApplicationEvent.h"
+#include "Yis/Events/KeyEvent.h"
+#include "Yis/Events/MouseEvent.h"
 namespace Yis 
 {
 	static bool s_GLFWInitialized = false;
@@ -44,7 +47,7 @@ namespace Yis
 		m_Data.Height = props.Height;
 		m_Data.Width = props.Width;
 
-		YS_CORE_INFO("Create window{0}({1},{2})", props.Title, props.Height, props.Width);
+		YS_CORE_INFO("Create window{0} ({1},{2})", props.Title, props.Height, props.Width);
 
 		if (!s_GLFWInitialized)
 		{
@@ -58,6 +61,89 @@ namespace Yis
 		glfwMakeContextCurrent(m_Window);
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
+
+		// Set	GLFW callbacks
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
+			{
+				WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
+				data->Width = width;
+				data->Height = height;
+
+				WindowResizeEvent event(width, height);
+				data->EventCallback(event);
+			}
+		);
+
+		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
+			{
+				WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
+				WindowCloseEvent event;
+				data->EventCallback(event);
+
+			}
+		);
+
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mode)
+			{
+				WindowData* data = (WindowData*)glfwGetWindowUserPointer(window);
+				switch (action)
+				{
+					case GLFW_PRESS:
+					{
+						KeyPressedEvent event(key,0);
+						data->EventCallback(event);
+						break;
+					}
+					case GLFW_RELEASE:
+					{
+						KeyReleasedEvent event(key);
+						data->EventCallback(event);
+						break;
+					}
+					case GLFW_REPEAT:
+					{
+						KeyPressedEvent event(key, 1);
+						data->EventCallback(event);
+						break;
+					}
+				}
+			});
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				switch (action)
+				{
+				case GLFW_PRESS:
+				{
+					MouseButtonPressedEvent event(button);
+					data.EventCallback(event);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					MouseButtonReleasedEvent event(button);
+					data.EventCallback(event);
+					break;
+				}
+				}
+			});
+
+		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				MouseScrolledEvent event((float)xOffset, (float)yOffset);
+				data.EventCallback(event);
+			});
+
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
+			{
+				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+				MouseMovedEvent event((float)xPos, (float)yPos);
+				data.EventCallback(event);
+			});
 	}
 	void WindowsWindow::Shutdown()
 	{

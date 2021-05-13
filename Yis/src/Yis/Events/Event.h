@@ -24,7 +24,7 @@ namespace Yis {
 	};
 
 	class YIS_API Event {
-	
+		friend class EventDispatcher;
 	public:
 		virtual EventType GetEventType() const = 0;
 		virtual  const char* GetName() const = 0;
@@ -64,4 +64,8 @@ namespace Yis {
 	private:
 		Event& m_Event;
 	};
+	inline std::ostream& operator<<(std::ostream& os, const Event& e) 
+	{
+		return os << e.ToString();
+	}
 }
