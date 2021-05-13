@@ -10,6 +10,7 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include "Yis/Log.h"
 
 #ifdef YS_PLATFORM_WINDOWS
 	#include<Windows.h>

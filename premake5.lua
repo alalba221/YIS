@@ -51,6 +51,11 @@ project "Sandbox"
 		defines "YS_Dist"
 		optimize "On"
 
+
+IncludeDir = {}
+IncludeDir["GLFW"] = "Yis/vendor/GLFW/include"
+include "Yis/vendor/GLFW"
+
 project "Yis"
 	location "Yis"
 	kind "SharedLib"
@@ -71,7 +76,13 @@ project "Yis"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+	links 
+	{ 
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"

@@ -10,4 +10,13 @@
 	#error Yis only support Windows!
 #endif
 
+#ifdef YS_ENABLE_ASSERTS
+	#define YS_APP_ASSERT(x,...){if(!x){YS_APP_ERROR("Assertion Failed :{0}",__VA_ARGS__);__debugbreak();}} 
+	#define YS_CORE_ASSERT(x,...){if(!x){YS_CORE_ERROR("Assertion Failed :{0}",__VA_ARGS__);__debugbreak();}} 
+#else
+	#define YS_APP_ASSERT(x,...)
+	#define YS_CORE_ASSERT(x,...)
+#endif // YS_ENABLE_ASSERTS
+
+
 #define BIT(x) (1<<x)

@@ -2,25 +2,23 @@
 #include "Application.h"
 #include "Yis/Events/ApplicationEvent.h"
 #include "Yis/Log.h"
+#include <GLFW/glfw3.h>
 namespace Yis {
 
 	Application::Application()
 	{
+		m_Window = std::unique_ptr<Window>(Window::Create());
 	}
 	Application::~Application()
 	{
 	}
 	void Application::Run()
 	{
-		Event* e	= new WindowResizeEvent(1220, 970);
-		if (e->IsInCategory(EventCategoryApplication))
+		while (m_Running)
 		{
-			YS_APP_TRACE(e->ToString());
+			glClearColor(1, 0, 1, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+			m_Window->OnUpdate();
 		}
-		if (e->IsInCategory(EventCategoryInput))
-		{
-			YS_APP_TRACE(e->ToString() );
-		}
-		while (true);
 	}
 }
