@@ -40,6 +40,12 @@
     <ClInclude Include="src\Yis\Events\MouseEvent.h">
       <Filter>Yis\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Yis\Layer.h">
+      <Filter>Yis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\LayerStack.h">
+      <Filter>Yis</Filter>
+    </ClInclude>
     <ClInclude Include="src\Yis\Log.h">
       <Filter>Yis</Filter>
     </ClInclude>
@@ -53,6 +59,9 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Yis\Application.cpp">
+      <Filter>Yis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\LayerStack.cpp">
       <Filter>Yis</Filter>
     </ClCompile>
     <ClCompile Include="src\Yis\Log.cpp">
