@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Yis/Events/ApplicationEvent.h"
 #include <glad/glad.h>
+#include "Input.h"
 namespace Yis {
 
 #define BIND_ENVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
@@ -68,6 +69,8 @@ namespace Yis {
 
 			for (Layer* layer : m_LayerStack)
 			{
+				auto [x, y] = Input::GetMousePosition();
+				YS_CORE_ERROR("{0},{1}", x, y);
 				layer->OnUpdate();
 			}
 			m_Window->OnUpdate();

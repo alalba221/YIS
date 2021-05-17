@@ -9,6 +9,7 @@ namespace Yis
 
 	Window* Window::Create(const WindowProps& prop) 
 	{
+		// Create function will call Constructor below
 		return new WindowsWindow(prop);
 	}
 
@@ -41,6 +42,7 @@ namespace Yis
 	{
 		return m_Data.VSync;
 	}
+
 	void WindowsWindow::Init(const WindowProps& props)
 	{
 		m_Data.Title = props.Title;

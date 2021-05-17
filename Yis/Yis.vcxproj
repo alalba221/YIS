@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Yis.h" />
     <ClInclude Include="src\Yis\Application.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="src\Yis\Events\KeyEvent.h" />
     <ClInclude Include="src\Yis\Events\MouseEvent.h" />
     <ClInclude Include="src\Yis\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Yis\Input.h" />
     <ClInclude Include="src\Yis\Layer.h" />
     <ClInclude Include="src\Yis\LayerStack.h" />
     <ClInclude Include="src\Yis\Log.h" />
@@ -168,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Yis\Application.cpp" />
     <ClCompile Include="src\Yis\ImGui\ImGuiLayer.cpp" />
