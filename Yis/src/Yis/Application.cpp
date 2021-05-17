@@ -13,7 +13,6 @@ namespace Yis {
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_ENVENT_FN(Application::OnEvent));
 	}
-
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);

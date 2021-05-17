@@ -24,7 +24,7 @@ project "Yis"
 	location "Yis"
 	kind "SharedLib"
 	language "C++"
-
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -55,7 +55,6 @@ project "Yis"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -71,22 +70,22 @@ project "Yis"
 
 	filter "configurations:Debug"
 		defines "YS_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 	filter "configurations:Release"
 		defines "YS_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 	filter "configurations:Dist"
 		defines "YS_Dist"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
-
+	staticruntime "off"
 	language "C++"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -109,7 +108,6 @@ project "Sandbox"
 	}
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -118,15 +116,15 @@ project "Sandbox"
 		}
 	filter "configurations:Debug"
 		defines "YS_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 	filter "configurations:Release"
 		defines "YS_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 	filter "configurations:Dist"
 		defines "YS_Dist"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 
