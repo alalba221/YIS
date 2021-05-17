@@ -1,13 +1,15 @@
 #include "yspch.h"
 #include "Application.h"
 #include "Yis/Events/ApplicationEvent.h"
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 namespace Yis {
 
 #define BIND_ENVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
-
+	Application* Application::s_Instance = nullptr;
 	Application::Application()
 	{
+		YS_CORE_ASSERT(!s_Instance, "Application already exists!");
+		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_ENVENT_FN(Application::OnEvent));
 	}
@@ -15,10 +17,23 @@ namespace Yis {
 	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
+	void Application::PushOverLay(Layer* overlay)
+	{
+		m_LayerStack.PushOverlay(overlay);
+		overlay->OnAttach();
+	}
+
 	void Application::PopLayer(Layer* layer)
 	{
 		m_LayerStack.PopLayer(layer);
+	}
+
+	
+	void  Application::PopOverlay(Layer* overlay)
+	{
+
 	}
 	void Application::OnEvent(Event& e)
 	{

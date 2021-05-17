@@ -1,5 +1,6 @@
 #pragma once
 #include "Yis/Window.h"
+#include "Glad/glad.h"
 #include <GLFW/glfw3.h>
 namespace Yis 
 {

@@ -8,7 +8,7 @@ public:
 
 	void OnUpdate() override
 	{
-		YS_APP_INFO("ExampleLayer::Update");
+		//YS_APP_INFO("ExampleLayer::Update");
 	}
 	void OnEvent(Yis::Event& event)override
 	{
@@ -26,10 +26,11 @@ public:
 	Sandbox() 
 	{
 		PushLayer(new ExampleLayer());
+		PushOverLay(new Yis:: ImGuiLayer());
 	};
 	~Sandbox() {};
 };
 
 Yis::Application* Yis::CreateApplication() {
-	return new Sandbox();
+	return new Sandbox();	
 }
