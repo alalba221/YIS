@@ -154,7 +154,7 @@ namespace Yis {
         if (keycode > 0 && keycode < 0x10000) 
         {
             io.AddInputCharacter((unsigned int)keycode);
-            YS_CORE_INFO("{0}", e);
+            YS_CORE_INFO("ImGui layer OnkeyTypedEvent {0}", e);
         }
         return false;
 

@@ -71,6 +71,8 @@
       <Filter>Yis</Filter>
     </ClInclude>
     <ClInclude Include="src\yspch.h" />
+    <ClInclude Include="src\Yis\KeyCodes.h" />
+    <ClInclude Include="src\Yis\MouseButtonCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">

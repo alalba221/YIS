@@ -69,8 +69,8 @@ namespace Yis {
 
 			for (Layer* layer : m_LayerStack)
 			{
-				auto [x, y] = Input::GetMousePosition();
-				YS_CORE_ERROR("{0},{1}", x, y);
+				/*auto [x, y] = Input::GetMousePosition();
+				YS_CORE_ERROR("{0},{1}", x, y);*/
 				layer->OnUpdate();
 			}
 			m_Window->OnUpdate();

@@ -8,11 +8,20 @@ public:
 
 	void OnUpdate() override
 	{
-		//YS_APP_INFO("ExampleLayer::Update");
+		if (Yis::Input::IsKeyPressed(YS_KEY_TAB))
+		{
+			YS_APP_TRACE("Tab key is pressed (poll)!");
+		}
 	}
 	void OnEvent(Yis::Event& event)override
 	{
-		YS_APP_TRACE("ExampleLayer {0}",event);
+		if (event.GetEventType() == Yis::EventType::KeyPressed)
+		{
+			Yis::KeyPressedEvent& e = (Yis::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == YS_KEY_TAB)
+				YS_APP_TRACE("Tab key is pressed (event)!");
+			YS_APP_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
 	void OnAttach() override
 	{}

@@ -162,9 +162,11 @@
     <ClInclude Include="src\Yis\Events\MouseEvent.h" />
     <ClInclude Include="src\Yis\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Yis\Input.h" />
+    <ClInclude Include="src\Yis\KeyCodes.h" />
     <ClInclude Include="src\Yis\Layer.h" />
     <ClInclude Include="src\Yis\LayerStack.h" />
     <ClInclude Include="src\Yis\Log.h" />
+    <ClInclude Include="src\Yis\MouseButtonCodes.h" />
     <ClInclude Include="src\Yis\Window.h" />
     <ClInclude Include="src\yspch.h" />
   </ItemGroup>
