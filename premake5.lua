@@ -14,6 +14,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Yis/vendor/GLFW/include"
 IncludeDir["Glad"] = "Yis/vendor/Glad/include"
 IncludeDir["ImGui"] = "Yis/vendor/imgui"
+IncludeDir["glm"] = "Yis/vendor/glm"
 startproject "Sandbox"
 
 group"Dependencies"
@@ -45,7 +46,8 @@ project "Yis"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 	links 
 	{ 
@@ -101,7 +103,8 @@ project "Sandbox"
 	includedirs
 	{
 		"Yis/vendor/spdlog/include",
-		"Yis/src"
+		"Yis/src",
+		"%{IncludeDir.glm}"
 
 	}
 	links

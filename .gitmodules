@@ -7,3 +7,6 @@
 [submodule "Yis/vendor/GLFW"]
 	path = Yis/vendor/GLFW
 	url = https://github.com/alalba221/glfw.git
+[submodule "Yis/vendor/glm"]
+	path = Yis/vendor/glm
+	url = https://github.com/g-truc/glm

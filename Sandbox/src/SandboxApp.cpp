@@ -27,6 +27,9 @@ public:
 	{}
 	void OnDetach()override
 	{}
+	virtual void OnImGuiRender() override{
+		//YS_APP_TRACE("example layer OnImGuiRender");
+	}
 
 };
 class Sandbox :public Yis::Application 

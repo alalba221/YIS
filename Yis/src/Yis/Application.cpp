@@ -13,6 +13,9 @@ namespace Yis {
 		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_ENVENT_FN(Application::OnEvent));
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverLay(m_ImGuiLayer);
 	}
 	void Application::PushLayer(Layer* layer)
 	{
@@ -73,6 +76,14 @@ namespace Yis {
 				YS_CORE_ERROR("{0},{1}", x, y);*/
 				layer->OnUpdate();
 			}
+
+			m_ImGuiLayer->Begin();
+			//for (Layer* layer : m_LayerStack) {
+			m_ImGuiLayer->OnImGuiRender();
+			//}
+			m_ImGuiLayer->End();
+
+
 			m_Window->OnUpdate();
 		}
 	}
