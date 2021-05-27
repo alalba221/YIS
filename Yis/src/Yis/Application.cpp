@@ -78,9 +78,9 @@ namespace Yis {
 			}
 
 			m_ImGuiLayer->Begin();
-			//for (Layer* layer : m_LayerStack) {
-			m_ImGuiLayer->OnImGuiRender();
-			//}
+			for (Layer* layer : m_LayerStack) {
+				layer->OnImGuiRender();
+			}
 			m_ImGuiLayer->End();
 
 

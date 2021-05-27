@@ -1,4 +1,5 @@
 #include "Yis.h"
+#include "imgui/imgui.h"
 class ExampleLayer :public Yis::Layer 
 {
 public:	
@@ -27,8 +28,11 @@ public:
 	{}
 	void OnDetach()override
 	{}
-	virtual void OnImGuiRender() override{
-		//YS_APP_TRACE("example layer OnImGuiRender");
+	virtual void OnImGuiRender() override
+	{
+		//ImGui::Begin("Text");
+		//ImGui::Text("Helli");
+		//ImGui::End();
 	}
 
 };
@@ -37,12 +41,12 @@ class Sandbox :public Yis::Application
 public:
 	Sandbox() 
 	{
-		PushLayer(new ExampleLayer());
-		PushOverLay(new Yis:: ImGuiLayer());
+		//PushLayer(new ExampleLayer());
+		//PushOverLay(new Yis:: ImGuiLayer());
 	};
 	~Sandbox() {};
 };
 
 Yis::Application* Yis::CreateApplication() {
-	return new Sandbox();	
+	return new Sandbox();
 }

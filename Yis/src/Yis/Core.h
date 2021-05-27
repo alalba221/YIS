@@ -1,11 +1,14 @@
 #pragma once
 #ifdef YS_PLATFORM_WINDOWS
-	
-	#ifdef YS_BUILD_DLL
-		#define YIS_API __declspec(dllexport)
+	#if YS_DYNAMIC_LINK	
+		#ifdef YS_BUILD_DLL
+			#define YIS_API __declspec(dllexport)
+		#else
+			#define YIS_API __declspec(dllimport)
+		#endif // YS_BUILD_DLL
 	#else
-		#define YIS_API __declspec(dllimport)
-	#endif // YS_BUILD_DLL
+		#define YIS_API
+	#endif
 #else
 	#error Yis only support Windows!
 #endif
