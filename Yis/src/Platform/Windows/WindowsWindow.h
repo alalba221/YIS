@@ -1,7 +1,7 @@
 #pragma once
-#include "Yis/Window.h"
-#include "Glad/glad.h"
+#include "Yis/Core/Window.h"
 #include <GLFW/glfw3.h>
+#include "Yis/Renderer/GraphicsContext.h"
 namespace Yis 
 {
 	
@@ -28,6 +28,7 @@ namespace Yis
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData 
 		{

@@ -45,6 +45,7 @@ project "Yis"
 	}
 	defines
 	{
+		"YS_PLATFORM_WINDOWS",
 		"_CRT_SECURE_NO_WARNINGS"
 	}
 	includedirs
@@ -103,6 +104,10 @@ project "Sandbox"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp"
+	}
+	defines
+	{
+		"YS_PLATFORM_WINDOWS"
 	}
 	includedirs
 	{

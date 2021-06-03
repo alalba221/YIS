@@ -12,7 +12,9 @@ public:
 		if (Yis::Input::IsKeyPressed(YS_KEY_TAB))
 		{
 			YS_APP_TRACE("Tab key is pressed (poll)!");
+			Yis::Renderer::Clear(0.2f, 0.3f, 0.8f, 1);
 		}
+
 	}
 	void OnEvent(Yis::Event& event)override
 	{
@@ -41,7 +43,7 @@ class Sandbox :public Yis::Application
 public:
 	Sandbox() 
 	{
-		//PushLayer(new ExampleLayer());
+		PushLayer(new ExampleLayer());
 		//PushOverLay(new Yis:: ImGuiLayer());
 	};
 	~Sandbox() {};

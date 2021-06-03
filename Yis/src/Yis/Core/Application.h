@@ -1,8 +1,9 @@
 ﻿#pragma once
-#include "Core.h"
-#include "Events/ApplicationEvent.h"
+#include "Base.h"
+#include "Yis/Core/Events/ApplicationEvent.h"
 #include "Window.h"
-#include "Yis/LayerStack.h"
+
+#include "LayerStack.h"
 #include "Yis/ImGui/ImGuiLayer.h"
 namespace Yis {
 	// Singleton

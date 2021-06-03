@@ -1,5 +1,5 @@
 #pragma once
-#include "Yis/Core.h"
+#include "Base.h"
 
 namespace Yis 
 {

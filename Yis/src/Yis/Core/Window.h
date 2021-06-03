@@ -1,8 +1,8 @@
 ﻿#pragma once
 
 #include "yspch.h"
-#include "Yis/Core.h"
-#include "Yis/Events/Event.h"
+#include "Yis/Core/Base.h"
+#include "Yis/Core/Events/Event.h"
 
 namespace Yis 
 {

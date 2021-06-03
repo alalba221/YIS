@@ -1,4 +1,7 @@
 #pragma once
+#ifdef YS_PLATFORM_WINDOWS
+#include<Windows.h>
+#endif // YS_PLATFORM_WINDOWS
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -8,11 +11,9 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <array>
 #include <unordered_map>
 #include <unordered_set>
-#include "Yis/Log.h"
+#include "Yis/Core/Log.h"
 
-#ifdef YS_PLATFORM_WINDOWS
-	#include<Windows.h>
-#endif // YS_PLATFORM_WINDOWS
 

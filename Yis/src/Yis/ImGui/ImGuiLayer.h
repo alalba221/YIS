@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Yis/Layer.h"
-#include "Yis/Events/ApplicationEvent.h"
-#include "Yis/Events/KeyEvent.h"
-#include "Yis/Events/MouseEvent.h"
+#include "Yis/Core/Layer.h"
+//#include "Events/ApplicationEvent.h"
+//#include "Events/KeyEvent.h"
+//#include "Events/MouseEvent.h"
 namespace Yis {
     class YIS_API ImGuiLayer : public Layer
     {
@@ -15,7 +15,11 @@ namespace Yis {
         void End();
 
 
-        virtual void OnUpdate() override {};
+        virtual void OnUpdate() override {
+           Begin();
+           OnImGuiRender(); 
+           End();
+        };
         virtual void OnEvent(Event& e) override {};
         
 

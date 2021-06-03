@@ -7,17 +7,26 @@
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Platform\OpenGL">
+      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform\Windows">
       <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Yis">
       <UniqueIdentifier>{11C82FA9-7DA7-AE44-86BF-391BF21D15A6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Yis\Events">
-      <UniqueIdentifier>{D5967388-C164-678E-AAF8-D7B4966543F3}</UniqueIdentifier>
+    <Filter Include="src\Yis\Core">
+      <UniqueIdentifier>{099F6D71-F501-FD15-9E87-35CC8AC9C898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Yis\Core\Events">
+      <UniqueIdentifier>{CDE6CAF1-3948-A8FF-C2B5-EEB12E16DFBE}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Yis\ImGui">
       <UniqueIdentifier>{FB458C9F-6706-08D6-3041-51539CC04CB2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Yis\Renderer">
+      <UniqueIdentifier>{D7AEAF6A-C3A7-CEBC-ECD9-B341D831AEC8}</UniqueIdentifier>
     </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
@@ -42,6 +51,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
       <Filter>src\Platform\Windows</Filter>
     </ClInclude>
@@ -51,50 +63,62 @@
     <ClInclude Include="src\Yis.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Yis\Application.h">
-      <Filter>src\Yis</Filter>
+    <ClInclude Include="src\Yis\Core\Application.h">
+      <Filter>src\Yis\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Yis\Core.h">
-      <Filter>src\Yis</Filter>
+    <ClInclude Include="src\Yis\Core\Base.h">
+      <Filter>src\Yis\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Core\Events\ApplicationEvent.h">
+      <Filter>src\Yis\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Core\Events\Event.h">
+      <Filter>src\Yis\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Core\Events\KeyEvent.h">
+      <Filter>src\Yis\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Core\Events\MouseEvent.h">
+      <Filter>src\Yis\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Core\Input.h">
+      <Filter>src\Yis\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Core\KeyCodes.h">
+      <Filter>src\Yis\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Core\Layer.h">
+      <Filter>src\Yis\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Core\LayerStack.h">
+      <Filter>src\Yis\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Core\Log.h">
+      <Filter>src\Yis\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Core\MouseButtonCodes.h">
+      <Filter>src\Yis\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Core\Window.h">
+      <Filter>src\Yis\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Yis\EntryPoint.h">
       <Filter>src\Yis</Filter>
     </ClInclude>
-    <ClInclude Include="src\Yis\Events\ApplicationEvent.h">
-      <Filter>src\Yis\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Yis\Events\Event.h">
-      <Filter>src\Yis\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Yis\Events\KeyEvent.h">
-      <Filter>src\Yis\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Yis\Events\MouseEvent.h">
-      <Filter>src\Yis\Events</Filter>
-    </ClInclude>
     <ClInclude Include="src\Yis\ImGui\ImGuiLayer.h">
       <Filter>src\Yis\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Yis\Input.h">
-      <Filter>src\Yis</Filter>
+    <ClInclude Include="src\Yis\Renderer\GraphicsContext.h">
+      <Filter>src\Yis\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Yis\KeyCodes.h">
-      <Filter>src\Yis</Filter>
+    <ClInclude Include="src\Yis\Renderer\RenderCommandQueue.h">
+      <Filter>src\Yis\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Yis\Layer.h">
-      <Filter>src\Yis</Filter>
+    <ClInclude Include="src\Yis\Renderer\Renderer.h">
+      <Filter>src\Yis\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Yis\LayerStack.h">
-      <Filter>src\Yis</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Yis\Log.h">
-      <Filter>src\Yis</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Yis\MouseButtonCodes.h">
-      <Filter>src\Yis</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Yis\Window.h">
-      <Filter>src\Yis</Filter>
+    <ClInclude Include="src\Yis\Renderer\RendererAPI.h">
+      <Filter>src\Yis\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\yspch.h">
       <Filter>src</Filter>
@@ -1344,16 +1368,26 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="src\Yis\Renderer\RenderCommand.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\Yis\Application.cpp">
-      <Filter>src\Yis</Filter>
+    <ClCompile Include="src\Yis\Core\Application.cpp">
+      <Filter>src\Yis\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\Core\LayerStack.cpp">
+      <Filter>src\Yis\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\Core\Log.cpp">
+      <Filter>src\Yis\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Yis\ImGui\ImGuiBuild.cpp">
       <Filter>src\Yis\ImGui</Filter>
@@ -1361,14 +1395,16 @@
     <ClCompile Include="src\Yis\ImGui\ImGuiLayer.cpp">
       <Filter>src\Yis\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Yis\LayerStack.cpp">
-      <Filter>src\Yis</Filter>
+    <ClCompile Include="src\Yis\Renderer\RenderCommandQueue.cpp">
+      <Filter>src\Yis\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\Yis\Log.cpp">
-      <Filter>src\Yis</Filter>
+    <ClCompile Include="src\Yis\Renderer\Renderer.cpp">
+      <Filter>src\Yis\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\yspch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Yis\Renderer\RenderCommand.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
   </ItemGroup>
 </Project>

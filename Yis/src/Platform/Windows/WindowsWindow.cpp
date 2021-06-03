@@ -1,8 +1,9 @@
 #include "yspch.h"
 #include "WindowsWindow.h"
-#include "Yis/Events/ApplicationEvent.h"
-#include "Yis/Events/KeyEvent.h"
-#include "Yis/Events/MouseEvent.h"
+#include "Yis/Core/Events/ApplicationEvent.h"
+#include "Yis/Core/Events/KeyEvent.h"
+#include "Yis/Core/Events/MouseEvent.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 namespace Yis 
 {
 	static bool s_GLFWInitialized = false;
@@ -24,7 +25,7 @@ namespace Yis
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 	void WindowsWindow::SetVSync(bool enabled)
 	{
@@ -60,9 +61,10 @@ namespace Yis
 		}
 	
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, props.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		YS_CORE_ASSERT(status, "Failed to initialize Glad");
+	
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 

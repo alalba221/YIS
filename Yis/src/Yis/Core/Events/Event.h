@@ -1,7 +1,7 @@
 #pragma once
 
 #include "yspch.h"
-#include "Yis/Core.h"
+
 
 namespace Yis {
 	
