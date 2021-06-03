@@ -1,6 +1,5 @@
 #include "yspch.h"
 #include "Renderer.h"
-#include "RenderCommand.h"
 namespace Yis {
 	Renderer* Renderer::s_Instance = new Renderer();
 	void Renderer::Init()
@@ -15,8 +14,11 @@ namespace Yis {
 
 	void Renderer::Clear(float r, float g, float b, float a)
 	{
-		float params[4] = { r, g, b, a };
-		s_Instance->m_CommandQueue.SubmitCommand(RenderCommand::Clear, params, sizeof(float) * 4);
+		
+		YS_RENDER_IV(r, g, b, a, {
+			RendererAPI::Clear(r, g, b, a);
+			});
+
 	}
 
 	void Renderer::ClearMagenta()

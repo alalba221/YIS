@@ -16,9 +16,7 @@ namespace Yis {
 
 
         virtual void OnUpdate() override {
-           Begin();
-           OnImGuiRender(); 
-           End();
+        
         };
         virtual void OnEvent(Event& e) override {};
         

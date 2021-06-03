@@ -9,12 +9,13 @@ public:
 
 	void OnUpdate() override
 	{
+		Yis::Renderer::Clear(0.8f, 0.3f, 0.8f, 1);
 		if (Yis::Input::IsKeyPressed(YS_KEY_TAB))
 		{
 			YS_APP_TRACE("Tab key is pressed (poll)!");
-			Yis::Renderer::Clear(0.2f, 0.3f, 0.8f, 1);
+			
 		}
-
+		
 	}
 	void OnEvent(Yis::Event& event)override
 	{
@@ -32,9 +33,9 @@ public:
 	{}
 	virtual void OnImGuiRender() override
 	{
-		//ImGui::Begin("Text");
-		//ImGui::Text("Helli");
-		//ImGui::End();
+		ImGui::Begin("Text");
+		ImGui::Text("Helli");
+		ImGui::End();
 	}
 
 };

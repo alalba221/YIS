@@ -67,14 +67,20 @@ namespace Yis {
 	{
 		while (m_Running)
 		{
+			Renderer::Get().WaitAndRender();
 
 			for (Layer* layer : m_LayerStack)
 			{
 				auto [x, y] = Input::GetMousePosition();
-				YS_CORE_ERROR("{0},{1}", x, y);
+				//YS_CORE_ERROR("{0},{1}", x, y);
 				layer->OnUpdate();
 			}
-			Renderer::Get().WaitAndRender();
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_LayerStack)
+			{
+				layer->OnImGuiRender();
+			}
+			m_ImGuiLayer->End();
 			m_Window->OnUpdate();
 		}
 	}
