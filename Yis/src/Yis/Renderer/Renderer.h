@@ -36,20 +36,21 @@ namespace Yis {
 #define YS_RENDER_PASTE(a, b) YS_RENDER_PASTE2(a, b)
 #define YS_RENDER_UNIQUE(x) YS_RENDER_PASTE(x, __LINE__)
 
-#define YS_RENDER(code) \
-    struct YS_RENDER_UNIQUE(YSRenderCommand) \
-    {\
-        static void Execute(void*)\
-        {\
-            code\
-        }\
-    };\
-	{\
-		auto mem = RenderCommandQueue::Submit(sizeof(YS_RENDER_UNIQUE(YSRenderCommand)), YS_RENDER_UNIQUE(YSRenderCommand)::Execute);\
-		new (mem) YS_RENDER_UNIQUE(YSRenderCommand)();\
-	}\
+//#define YS_RENDER(code) \
+//    struct YS_RENDER_UNIQUE(YSRenderCommand) \
+//    {\
+//        static void Execute(void*)\
+//        {\
+//            code\
+//        }\
+//    };\
+//	{\
+//		auto mem = RenderCommandQueue::Submit(sizeof(YS_RENDER_UNIQUE(YSRenderCommand)), YS_RENDER_UNIQUE(YSRenderCommand)::Execute);\
+//		new (mem) YS_RENDER_UNIQUE(YSRenderCommand)();\
+//	}\
 
-#define YS_RENDER_I(arg0, code) \
+#define YS_RENDER_1(arg0, code) \
+	do {\
     struct YS_RENDER_UNIQUE(YSRenderCommand) \
     {\
 		YS_RENDER_UNIQUE(YSRenderCommand)(typename ::std::remove_const<typename ::std::remove_reference<decltype(arg0)>::type>::type arg0) \
@@ -64,11 +65,12 @@ namespace Yis {
 		typename ::std::remove_const<typename ::std::remove_reference<decltype(arg0)>::type>::type arg0;\
     };\
 	{\
-		auto mem = ::Hazel::Renderer::Submit(YS_RENDER_UNIQUE(YSRenderCommand)::Execute, sizeof(YS_RENDER_UNIQUE(YSRenderCommand)));\
+		auto mem = ::Yis::Renderer::Submit(YS_RENDER_UNIQUE(YSRenderCommand)::Execute, sizeof(YS_RENDER_UNIQUE(YSRenderCommand)));\
 		new (mem) YS_RENDER_UNIQUE(YSRenderCommand)(arg0);\
-	}\
+	} } while(0)
 
-#define YS_RENDER_II(arg0, arg1, code) \
+
+#define YS_RENDER_2(arg0, arg1, code) \
     struct YS_RENDER_UNIQUE(YSRenderCommand) \
     {\
 		YS_RENDER_UNIQUE(YSRenderCommand)(typename ::std::remove_const<typename ::std::remove_reference<decltype(arg0)>::type>::type arg0,\
@@ -90,7 +92,7 @@ namespace Yis {
 		new (mem) YS_RENDER_UNIQUE(YSRenderCommand)(arg0, arg1);\
 	}\
 
-#define YS_RENDER_III(arg0, arg1, arg2, code) \
+#define YS_RENDER_3(arg0, arg1, arg2, code) \
     struct YS_RENDER_UNIQUE(YSRenderCommand) \
     {\
 		YS_RENDER_UNIQUE(YSRenderCommand)(typename ::std::remove_const<typename ::std::remove_reference<decltype(arg0)>::type>::type arg0,\
@@ -115,7 +117,7 @@ namespace Yis {
 		new (mem) YS_RENDER_UNIQUE(YSRenderCommand)(arg0, arg1, arg2);\
 	}\
 
-#define YS_RENDER_IV(arg0, arg1, arg2, arg3, code) \
+#define YS_RENDER_4(arg0, arg1, arg2, arg3, code) \
     struct YS_RENDER_UNIQUE(YSRenderCommand) \
     {\
 		YS_RENDER_UNIQUE(YSRenderCommand)(typename ::std::remove_const<typename ::std::remove_reference<decltype(arg0)>::type>::type arg0,\

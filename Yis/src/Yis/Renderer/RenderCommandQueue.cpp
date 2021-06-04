@@ -17,14 +17,13 @@ namespace Yis {
 	void* RenderCommandQueue::Allocate(RenderCommandFn fn, unsigned int size)
 	{
 
-		/// fn + # of para + data block
+		/// fn(8) + # of para(4) + data block
 		/// return the pointer to datablock
 		* (RenderCommandFn*)m_CommandBufferPtr = fn;
 		m_CommandBufferPtr += sizeof(RenderCommandFn);
 
 		*(int*)m_CommandBufferPtr = size;
 		m_CommandBufferPtr += sizeof(unsigned int);
-
 		void* memory = m_CommandBufferPtr;
 		m_CommandBufferPtr += size;
 

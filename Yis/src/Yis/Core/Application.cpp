@@ -38,6 +38,15 @@ namespace Yis {
 	{
 
 	}
+	void Application::RenderImGui()
+	{
+		m_ImGuiLayer->Begin();
+		for (Layer* layer : m_LayerStack)
+			layer->OnImGuiRender();
+
+		m_ImGuiLayer->End();
+
+	}
 	void Application::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
@@ -67,20 +76,18 @@ namespace Yis {
 	{
 		while (m_Running)
 		{
-			Renderer::Get().WaitAndRender();
-
+			
 			for (Layer* layer : m_LayerStack)
 			{
 				auto [x, y] = Input::GetMousePosition();
 				//YS_CORE_ERROR("{0},{1}", x, y);
 				layer->OnUpdate();
 			}
-			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
-			{
-				layer->OnImGuiRender();
-			}
-			m_ImGuiLayer->End();
+			Application* app = this;
+			YS_RENDER_1(app, { app->RenderImGui(); });
+			Renderer::Get().WaitAndRender();
+			
+			//RenderImGui();
 			m_Window->OnUpdate();
 		}
 	}

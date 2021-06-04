@@ -21,6 +21,8 @@ namespace Yis {
 
 		void PushOverLay(Layer* overlay);
 		void PopOverlay(Layer* overlay);
+		void RenderImGui();
+
 		inline Window& GetWindow() { return *m_Window; }
 		static inline Application* Get() { return s_Instance; }
 	protected:
