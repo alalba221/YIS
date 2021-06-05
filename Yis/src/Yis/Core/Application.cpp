@@ -16,6 +16,8 @@ namespace Yis {
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverLay(m_ImGuiLayer);
+
+		Renderer::Init();
 	}
 	void Application::PushLayer(Layer* layer)
 	{
@@ -85,6 +87,7 @@ namespace Yis {
 			}
 			Application* app = this;
 			YS_RENDER_1(app, { app->RenderImGui(); });
+			YS_CORE_INFO("Command Application RenderImGui");
 			Renderer::Get().WaitAndRender();
 			
 			//RenderImGui();

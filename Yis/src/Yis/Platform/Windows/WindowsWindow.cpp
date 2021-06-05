@@ -3,7 +3,7 @@
 #include "Yis/Core/Events/ApplicationEvent.h"
 #include "Yis/Core/Events/KeyEvent.h"
 #include "Yis/Core/Events/MouseEvent.h"
-#include "Platform/OpenGL/OpenGLContext.h"
+#include "Yis/Platform/OpenGL/OpenGLContext.h"
 namespace Yis 
 {
 	static bool s_GLFWInitialized = false;
