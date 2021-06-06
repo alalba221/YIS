@@ -42,6 +42,8 @@ public:
         m_IB = std::unique_ptr<Yis::IndexBuffer>(Yis::IndexBuffer::Create());
         m_IB->SetData(indices, sizeof(indices));
 
+        auto shader = Yis::Shader::Create("assets/shaders/shader.glsl");
+
 	}
 
 	virtual void OnDetach() override

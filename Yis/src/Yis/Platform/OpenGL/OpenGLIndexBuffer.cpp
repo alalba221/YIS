@@ -34,6 +34,4 @@ namespace Yis
 			});
 		YS_CORE_INFO("Command OpenGLIndexBuffer Bind");
 	}
-
-	
 }

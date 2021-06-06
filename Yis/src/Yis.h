@@ -20,6 +20,7 @@
 #include "Yis/Renderer/VertexBuffer.h"
 #include "Yis/Renderer/IndexBuffer.h"
 #include "Yis/Renderer/Texture.h"
+#include "Yis/Renderer/Shader.h"
 // ---------------------------------------------------
 
 // Entry Point
