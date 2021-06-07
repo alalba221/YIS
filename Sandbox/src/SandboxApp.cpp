@@ -42,8 +42,8 @@ public:
         m_IB = std::unique_ptr<Yis::IndexBuffer>(Yis::IndexBuffer::Create());
         m_IB->SetData(indices, sizeof(indices));
 
-        auto shader = Yis::Shader::Create("assets/shaders/shader.glsl");
-
+        //auto shader = Yis::Shader::Create("assets/shaders/shader.glsl");
+        m_Shader.reset(Yis::Shader::Create("assets/shaders/shader.glsl"));
 	}
 
 	virtual void OnDetach() override
@@ -55,7 +55,7 @@ public:
 		
         ////using namespace Yis;
         Yis::Renderer::Clear(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
-
+        m_Shader->Bind();
         m_VB->Bind();
         m_IB->Bind();
         Yis::Renderer::DrawIndexed(3);
@@ -172,7 +172,7 @@ public:
 private:
     std::unique_ptr<Yis::VertexBuffer> m_VB;
     std::unique_ptr<Yis::IndexBuffer> m_IB;
-
+    std::unique_ptr<Yis::Shader> m_Shader;
 	float m_ClearColor[4];
 };
 
