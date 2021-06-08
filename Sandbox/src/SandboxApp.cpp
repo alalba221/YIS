@@ -72,7 +72,7 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
-		static bool show_demo_window = true;
+		static bool show_demo_window = false;
 		if (show_demo_window)
 			ImGui::ShowDemoWindow(&show_demo_window);
 
@@ -80,7 +80,7 @@ public:
 		ImGui::ColorEdit4("Clear Color", m_ClearColor);
         ImGui::ColorEdit4("Triangle Color", glm::value_ptr(m_TriangleColor));
 		ImGui::End();
-
+#if ENABLE_DOCKSPACE
         static bool p_open = true;
         static bool opt_fullscreen = false;
         static bool opt_padding = false;
@@ -172,7 +172,7 @@ public:
         }
 
         ImGui::End();
-
+#endif
 	}
 
 	virtual void OnEvent(Yis::Event& event) override
