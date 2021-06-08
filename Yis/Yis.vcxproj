@@ -141,10 +141,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLShader.h" />
-    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLVertexBuffer.h" />
+    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLTexture.h" />
-    <ClInclude Include="src\Yis\Renderer\IndexBuffer.h" />
-    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLIndexBuffer.h" />
     <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLFrameBuffer.h" />
     <ClInclude Include="src\Yis\Renderer\FrameBuffer.h" />
     <ClInclude Include="src\Yis\Renderer\Shader.h" />
@@ -171,7 +169,7 @@
     <ClInclude Include="src\Yis\Renderer\RenderCommandQueue.h" />
     <ClInclude Include="src\Yis\Renderer\Renderer.h" />
     <ClInclude Include="src\Yis\Renderer\RendererAPI.h" />
-    <ClInclude Include="src\Yis\Renderer\VertexBuffer.h" />
+    <ClInclude Include="src\Yis\Renderer\Buffer.h" />
     <ClInclude Include="src\yspch.h" />
     <ClInclude Include="src\Yis\Renderer\Texture.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
@@ -592,10 +590,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLShader.cpp" />
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLVertexBuffer.cpp" />
+    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLTexture.cpp" />
-    <ClCompile Include="src\Yis\Renderer\IndexBuffer.cpp" />
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLIndexBuffer.cpp" />
     <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLFrameBuffer.cpp" />
     <ClCompile Include="src\Yis\Renderer\Shader.cpp" />
     <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLRendererAPI.cpp" />
@@ -609,7 +605,7 @@
     <ClCompile Include="src\Yis\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Yis\Renderer\RenderCommandQueue.cpp" />
     <ClCompile Include="src\Yis\Renderer\Renderer.cpp" />
-    <ClCompile Include="src\Yis\Renderer\VertexBuffer.cpp" />
+    <ClCompile Include="src\Yis\Renderer\Buffer.cpp" />
     <ClCompile Include="src\yspch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
