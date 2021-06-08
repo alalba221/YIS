@@ -1,5 +1,8 @@
 #include "Yis.h"
 #include "imgui/imgui.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 static void ImGuiShowHelpMarker(const char* desc)
 {
 	ImGui::TextDisabled("(?)");
@@ -16,7 +19,7 @@ class EditorLayer : public Yis::Layer
 {
 public:
 	EditorLayer()
-		: m_ClearColor{ 0.2f, 0.3f, 0.8f, 1.0f }
+        : m_ClearColor{ 0.2f, 0.3f, 0.8f, 1.0f }, m_TriangleColor({ 0.8f, 0.2f, 0.3f, 1.0f })
 	{
 	}
 
@@ -55,6 +58,11 @@ public:
 		
         ////using namespace Yis;
         Yis::Renderer::Clear(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
+        
+        Yis::UniformBufferDeclaration<sizeof(glm::vec4), 1> buffer;
+        buffer.Push("u_Color", m_TriangleColor);
+        m_Shader->UploadUniformBuffer(buffer);
+
         m_Shader->Bind();
         m_VB->Bind();
         m_IB->Bind();
@@ -70,10 +78,11 @@ public:
 
 		ImGui::Begin("GameLayer");
 		ImGui::ColorEdit4("Clear Color", m_ClearColor);
+        ImGui::ColorEdit4("Triangle Color", glm::value_ptr(m_TriangleColor));
 		ImGui::End();
 
         static bool p_open = true;
-        static bool opt_fullscreen = true;
+        static bool opt_fullscreen = false;
         static bool opt_padding = false;
         static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
 
@@ -174,6 +183,7 @@ private:
     std::unique_ptr<Yis::IndexBuffer> m_IB;
     std::unique_ptr<Yis::Shader> m_Shader;
 	float m_ClearColor[4];
+    glm::vec4 m_TriangleColor;
 };
 
 

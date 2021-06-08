@@ -135,5 +135,47 @@ namespace Yis
 		return GL_NONE;
 
 	}
+
+	void OpenGLShader::UploadUniformBuffer(const UniformBufferBase& uniformBuffer)
+	{
+		for (unsigned int i = 0; i < uniformBuffer.GetUniformCount(); i++)
+		{
+			const UniformDecl& decl = uniformBuffer.GetUniforms()[i];
+			switch (decl.Type)
+			{
+				case UniformType::Float:
+				{
+					const std::string& name = decl.Name;
+					float value = *(float*)(uniformBuffer.GetBuffer() + decl.Offset);
+					YS_RENDER_S2(name, value, {
+						self->UploadUniformFloat(name, value);
+						});
+					YS_CORE_INFO("Command UploadUniformFloat {0}", name);
+				}
+				case UniformType::Float4:
+				{
+					const std::string& name = decl.Name;
+					glm::vec4& values = *(glm::vec4*)(uniformBuffer.GetBuffer() + decl.Offset);
+					YS_RENDER_S2(name, values, {
+						self->UploadUniformFloat4(name, values);
+						});
+					YS_CORE_INFO("Command UploadUniformFloat4 {0}", name);
+				}
+			}
+		}
+	}
+
+	void OpenGLShader::UploadUniformFloat(const std::string& name, float value)
+	{
+		glUseProgram(m_RendererID);
+		glUniform1f(glGetUniformLocation(m_RendererID, name.c_str()), value);
+	}
+
+	void OpenGLShader::UploadUniformFloat4(const std::string& name, const glm::vec4& values)
+	{
+		glUseProgram(m_RendererID);
+		glUniform4f(glGetUniformLocation(m_RendererID, name.c_str()), values.x, values.y, values.z, values.w);
+	}
+
 }
 

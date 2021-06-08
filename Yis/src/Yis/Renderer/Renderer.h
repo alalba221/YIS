@@ -113,7 +113,7 @@ namespace Yis {
 		typename ::std::remove_const<typename ::std::remove_reference<decltype(arg2)>::type>::type arg2;\
     };\
 	{\
-		auto mem = ::Hazel::Renderer::Submit(YS_RENDER_UNIQUE(YSRenderCommand)::Execute, sizeof(YS_RENDER_UNIQUE(YSRenderCommand)));\
+		auto mem = ::Yis::Renderer::Submit(YS_RENDER_UNIQUE(YSRenderCommand)::Execute, sizeof(YS_RENDER_UNIQUE(YSRenderCommand)));\
 		new (mem) YS_RENDER_UNIQUE(YSRenderCommand)(arg0, arg1, arg2);\
 	}\
 
