@@ -140,6 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Yis\Renderer\Camera.h" />
     <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLTexture.h" />
@@ -589,6 +590,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Yis\Renderer\Camera.cpp" />
     <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLTexture.cpp" />

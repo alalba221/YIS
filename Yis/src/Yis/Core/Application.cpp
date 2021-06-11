@@ -3,6 +3,11 @@
 #include "Yis/Core/Events/ApplicationEvent.h"
 #include "Yis/Renderer/Renderer.h"
 #include "Input.h"
+
+//#include <imgui/imgui.h>
+
+#include <Windows.h>
+
 namespace Yis {
 
 #define BIND_ENVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
@@ -49,6 +54,31 @@ namespace Yis {
 		m_ImGuiLayer->End();
 
 	}
+	std::string Application::OpenFile(const std::string& filter) const
+	{
+		//OPENFILENAMEA ofn;       // common dialog box structure
+		//CHAR szFile[260] = { 0 };       // if using TCHAR macros
+
+		//// Initialize OPENFILENAME
+		//ZeroMemory(&ofn, sizeof(OPENFILENAME));
+		//ofn.lStructSize = sizeof(OPENFILENAME);
+		//ofn.hwndOwner = glfwGetWin32Window((GLFWwindow*)m_Window->GetNativeWindow());
+		//ofn.lpstrFile = szFile;
+		//ofn.nMaxFile = sizeof(szFile);
+		//ofn.lpstrFilter = "All\0*.*\0";
+		//ofn.nFilterIndex = 1;
+		//ofn.lpstrFileTitle = NULL;
+		//ofn.nMaxFileTitle = 0;
+		//ofn.lpstrInitialDir = NULL;
+		//ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+		//if (GetOpenFileNameA(&ofn) == TRUE)
+		//{
+		//	return ofn.lpstrFile;
+		//}
+		return std::string();
+
+	}
 	void Application::OnEvent(Event& e)
 	{
 		EventDispatcher dispatcher(e);
@@ -70,6 +100,11 @@ namespace Yis {
 		
 		return true;
 	}
+
+	bool Application::OnWindowResize(WindowResizeEvent& e)
+	{
+		return false;
+	}
 	
 	Application::~Application()
 	{
@@ -82,7 +117,7 @@ namespace Yis {
 			for (Layer* layer : m_LayerStack)
 			{
 				auto [x, y] = Input::GetMousePosition();
-				//YS_CORE_ERROR("{0},{1}", x, y);
+				YS_CORE_ERROR("{0},{1}", x, y);
 				layer->OnUpdate();
 			}
 			Application* app = this;

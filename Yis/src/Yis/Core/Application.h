@@ -25,6 +25,8 @@ namespace Yis {
 
 		inline Window& GetWindow() { return *m_Window; }
 		static inline Application* Get() { return s_Instance; }
+		std::string OpenFile(const std::string& filter) const;
+
 	protected:
 		static Application* s_Instance;
 	private:		
@@ -32,6 +34,7 @@ namespace Yis {
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		bool OnWindowClose(WindowCloseEvent& e);
+		bool OnWindowResize(WindowResizeEvent& e);
 		LayerStack m_LayerStack;
 	};
 	// to be defined in Client

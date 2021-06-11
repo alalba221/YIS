@@ -1376,6 +1376,7 @@
     </ClInclude>
     <ClInclude Include="src\Yis\Renderer\Buffer.h" />
     <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Yis\Renderer\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Yis\Core\Application.cpp">
@@ -1419,5 +1420,6 @@
     </ClCompile>
     <ClCompile Include="src\Yis\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Yis\Renderer\Camera.cpp" />
   </ItemGroup>
 </Project>

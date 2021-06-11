@@ -19,7 +19,8 @@ class EditorLayer : public Yis::Layer
 {
 public:
 	EditorLayer()
-        : m_ClearColor{ 0.2f, 0.3f, 0.8f, 1.0f }, m_TriangleColor({ 0.8f, 0.2f, 0.3f, 1.0f })
+        : m_ClearColor{ 0.2f, 0.3f, 0.8f, 1.0f }, m_TriangleColor({ 0.8f, 0.2f, 0.3f, 1.0f }),
+        m_Camera(glm::perspectiveFov(glm::radians(45.0f), 1280.0f, 720.0f, 0.1f, 10000.0f))
 	{
 	}
 
@@ -30,8 +31,8 @@ public:
 	virtual void OnAttach() override
 	{
         static float vertices[] = {
-            -0.5f, -0.5f, 0.0f,
-             0.5f, -0.5f, 0.0f,
+             0.0f,  0.0f, 0.0f,
+             0.5f,  0.0f, 0.0f,
              0.0f,  0.5f, 0.0f
         };
 
@@ -59,11 +60,14 @@ public:
         ////using namespace Yis;
         Yis::Renderer::Clear(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
         
-        Yis::UniformBufferDeclaration<sizeof(glm::vec4), 1> buffer;
-        buffer.Push("u_Color", m_TriangleColor);
-        m_Shader->UploadUniformBuffer(buffer);
-
+        m_Camera.Update();
+        glm::mat4 viewProjection = m_Camera.GetProjectionMatrix() * m_Camera.GetViewMatrix();
+        Yis::UniformBufferDeclaration<sizeof(glm::mat4) +sizeof(glm::vec4) , 2> simplePbrShaderUB;
+        simplePbrShaderUB.Push("u_Color", m_TriangleColor);
+        simplePbrShaderUB.Push("u_ViewProjectionMatrix", viewProjection);
+        m_Shader->UploadUniformBuffer(simplePbrShaderUB);
         m_Shader->Bind();
+        
         m_VB->Bind();
         m_IB->Bind();
         Yis::Renderer::DrawIndexed(3);
@@ -80,7 +84,7 @@ public:
 		ImGui::ColorEdit4("Clear Color", m_ClearColor);
         ImGui::ColorEdit4("Triangle Color", glm::value_ptr(m_TriangleColor));
 		ImGui::End();
-#if ENABLE_DOCKSPACE
+//#if ENABLE_DOCKSPACE
         static bool p_open = true;
         static bool opt_fullscreen = false;
         static bool opt_padding = false;
@@ -172,7 +176,7 @@ public:
         }
 
         ImGui::End();
-#endif
+//#endif
 	}
 
 	virtual void OnEvent(Yis::Event& event) override
@@ -182,6 +186,8 @@ private:
     std::unique_ptr<Yis::VertexBuffer> m_VB;
     std::unique_ptr<Yis::IndexBuffer> m_IB;
     std::unique_ptr<Yis::Shader> m_Shader;
+    Yis::Camera m_Camera;
+
 	float m_ClearColor[4];
     glm::vec4 m_TriangleColor;
 };
