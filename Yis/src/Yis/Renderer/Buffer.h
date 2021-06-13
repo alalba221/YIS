@@ -25,7 +25,7 @@ namespace Yis {
 
 		virtual unsigned int GetSize() const = 0;
 		virtual unsigned int GetRendererID() const = 0;
-
+		virtual unsigned int GetCount() const = 0;
 		static IndexBuffer* Create(unsigned int size = 0);
 	};
 

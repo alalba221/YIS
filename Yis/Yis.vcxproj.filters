@@ -4,15 +4,6 @@
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Platform">
-      <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Platform\OpenGL">
-      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Platform\Windows">
-      <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Yis">
       <UniqueIdentifier>{11C82FA9-7DA7-AE44-86BF-391BF21D15A6}</UniqueIdentifier>
     </Filter>
@@ -24,6 +15,15 @@
     </Filter>
     <Filter Include="src\Yis\ImGui">
       <UniqueIdentifier>{FB458C9F-6706-08D6-3041-51539CC04CB2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Yis\Platform">
+      <UniqueIdentifier>{85A7D28F-71A0-F1E1-9AD2-D666862AD1ED}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Yis\Platform\OpenGL">
+      <UniqueIdentifier>{190901E2-8540-4979-8E4A-AD9CFA007072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Yis\Platform\Windows">
+      <UniqueIdentifier>{BF063E7A-AB2B-8DFA-D476-728AC0FA8B18}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Yis\Renderer">
       <UniqueIdentifier>{D7AEAF6A-C3A7-CEBC-ECD9-B341D831AEC8}</UniqueIdentifier>
@@ -99,6 +99,36 @@
     <ClInclude Include="src\Yis\ImGui\ImGuiLayer.h">
       <Filter>src\Yis\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>src\Yis\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Yis\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLFrameBuffer.h">
+      <Filter>src\Yis\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLShader.h">
+      <Filter>src\Yis\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLTexture.h">
+      <Filter>src\Yis\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Platform\Windows\WindowsInput.h">
+      <Filter>src\Yis\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Platform\Windows\WindowsWindow.h">
+      <Filter>src\Yis\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Renderer\Buffer.h">
+      <Filter>src\Yis\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Renderer\Camera.h">
+      <Filter>src\Yis\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Renderer\FrameBuffer.h">
+      <Filter>src\Yis\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Yis\Renderer\GraphicsContext.h">
       <Filter>src\Yis\Renderer</Filter>
     </ClInclude>
@@ -109,6 +139,12 @@
       <Filter>src\Yis\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Yis\Renderer\RendererAPI.h">
+      <Filter>src\Yis\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Renderer\Shader.h">
+      <Filter>src\Yis\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Yis\Renderer\Texture.h">
       <Filter>src\Yis\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\yspch.h">
@@ -1359,24 +1395,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Yis\Renderer\Shader.h" />
-    <ClInclude Include="src\Yis\Renderer\FrameBuffer.h" />
-    <ClInclude Include="src\Yis\Renderer\Texture.h" />
-    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLContext.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLFrameBuffer.h" />
-    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLShader.h" />
-    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLTexture.h" />
-    <ClInclude Include="src\Yis\Platform\Windows\WindowsInput.h">
-      <Filter>src\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Yis\Platform\Windows\WindowsWindow.h">
-      <Filter>src\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Yis\Renderer\Buffer.h" />
-    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLBuffer.h" />
-    <ClInclude Include="src\Yis\Renderer\Camera.h" />
+    <ClInclude Include="src\Yis\Renderer\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Yis\Core\Application.cpp">
@@ -1394,32 +1413,51 @@
     <ClCompile Include="src\Yis\ImGui\ImGuiLayer.cpp">
       <Filter>src\Yis\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>src\Yis\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Yis\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLFrameBuffer.cpp">
+      <Filter>src\Yis\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>src\Yis\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>src\Yis\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLTexture.cpp">
+      <Filter>src\Yis\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\Platform\Windows\WindowsInput.cpp">
+      <Filter>src\Yis\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\Platform\Windows\WindowsWindow.cpp">
+      <Filter>src\Yis\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\Renderer\Buffer.cpp">
+      <Filter>src\Yis\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\Renderer\Camera.cpp">
+      <Filter>src\Yis\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Yis\Renderer\RenderCommandQueue.cpp">
       <Filter>src\Yis\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Yis\Renderer\Renderer.cpp">
       <Filter>src\Yis\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Yis\Renderer\Shader.cpp">
+      <Filter>src\Yis\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Yis\Renderer\Texture.cpp">
+      <Filter>src\Yis\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\yspch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Yis\Renderer\Shader.cpp" />
-    <ClCompile Include="src\Yis\Renderer\Texture.cpp" />
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLContext.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLFrameBuffer.cpp" />
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLRendererAPI.cpp" />
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLShader.cpp" />
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLTexture.cpp" />
-    <ClCompile Include="src\Yis\Platform\Windows\WindowsInput.cpp">
-      <Filter>src\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Yis\Platform\Windows\WindowsWindow.cpp">
-      <Filter>src\Platform\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Yis\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLBuffer.cpp" />
-    <ClCompile Include="src\Yis\Renderer\Camera.cpp" />
+    <ClCompile Include="src\Yis\Renderer\Mesh.cpp" />
   </ItemGroup>
 </Project>

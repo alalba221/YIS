@@ -37,6 +37,8 @@ namespace Yis {
 
 		virtual unsigned int GetSize() const override { return m_Size; }
 		virtual unsigned int GetRendererID() const override { return m_RendererID; }
+		
+		virtual unsigned int GetCount() const { return m_Size / sizeof(unsigned int); }
 	private:
 		unsigned int m_RendererID;
 		unsigned int m_Size;

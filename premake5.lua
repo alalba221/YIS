@@ -55,7 +55,8 @@ project "Yis"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{prj.name}/vendor/assimp/include"
 	}
 	links 
 	{ 
@@ -119,7 +120,8 @@ project "Sandbox"
 	}
 	links
 	{
-		"Yis"
+		"Yis",
+		"Yis/vendor/assimp/win64/assimp.lib"
 	}
 	filter "system:windows"
 		

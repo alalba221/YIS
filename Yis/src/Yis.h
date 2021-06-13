@@ -21,6 +21,7 @@
 #include "Yis/Renderer/Texture.h"
 #include "Yis/Renderer/Shader.h"
 #include "Yis/Renderer/Camera.h"
+#include "Yis/Renderer/Mesh.h"
 // ---------------------------------------------------
 
 // Entry Point

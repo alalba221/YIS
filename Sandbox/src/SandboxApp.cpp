@@ -30,7 +30,9 @@ public:
 
 	virtual void OnAttach() override
 	{
-        static float vertices[] = {
+        m_Mesh.reset(new Yis::Mesh("assets/models/dinosaur/dinosaur5k.obj"));
+        
+        /*static float vertices[] = {
              0.0f,  0.0f, 0.0f,
              0.5f,  0.0f, 0.0f,
              0.0f,  0.5f, 0.0f
@@ -44,7 +46,7 @@ public:
         m_VB->SetData(vertices, sizeof(vertices));
 
         m_IB = std::unique_ptr<Yis::IndexBuffer>(Yis::IndexBuffer::Create());
-        m_IB->SetData(indices, sizeof(indices));
+        m_IB->SetData(indices, sizeof(indices));*/
 
         //auto shader = Yis::Shader::Create("assets/shaders/shader.glsl");
         m_Shader.reset(Yis::Shader::Create("assets/shaders/shader.glsl"));
@@ -68,9 +70,10 @@ public:
         m_Shader->UploadUniformBuffer(simplePbrShaderUB);
         m_Shader->Bind();
         
-        m_VB->Bind();
-        m_IB->Bind();
-        Yis::Renderer::DrawIndexed(3);
+        //m_VB->Bind();
+        //m_IB->Bind();
+        //Yis::Renderer::DrawIndexed(3);
+        m_Mesh->Render();
 
 	}
 
@@ -187,7 +190,7 @@ private:
     std::unique_ptr<Yis::IndexBuffer> m_IB;
     std::unique_ptr<Yis::Shader> m_Shader;
     Yis::Camera m_Camera;
-
+    std::unique_ptr<Yis::Mesh> m_Mesh;
 	float m_ClearColor[4];
     glm::vec4 m_TriangleColor;
 };

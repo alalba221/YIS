@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>yspch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;YS_PLATFORM_WINDOWS;YS_BUILD_DLL;GLFW_INCLUDE_NONE;YS_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\Glad\include;vendor\GLFW\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\Glad\include;vendor\GLFW\include;vendor\imgui;vendor\glm;vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -97,7 +97,7 @@
       <PrecompiledHeaderFile>yspch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;YS_PLATFORM_WINDOWS;YS_BUILD_DLL;GLFW_INCLUDE_NONE;YS_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\Glad\include;vendor\GLFW\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\Glad\include;vendor\GLFW\include;vendor\imgui;vendor\glm;vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -121,7 +121,7 @@
       <PrecompiledHeaderFile>yspch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;YS_PLATFORM_WINDOWS;YS_BUILD_DLL;GLFW_INCLUDE_NONE;YS_Dist;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\Glad\include;vendor\GLFW\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\Glad\include;vendor\GLFW\include;vendor\imgui;vendor\glm;vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -140,16 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Yis\Renderer\Camera.h" />
-    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLShader.h" />
-    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLBuffer.h" />
-    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLTexture.h" />
-    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLFrameBuffer.h" />
-    <ClInclude Include="src\Yis\Renderer\FrameBuffer.h" />
-    <ClInclude Include="src\Yis\Renderer\Shader.h" />
-    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLContext.h" />
-    <ClInclude Include="src\Yis\Platform\Windows\WindowsInput.h" />
-    <ClInclude Include="src\Yis\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="src\Yis\Renderer\Mesh.h" />
     <ClInclude Include="src\Yis.h" />
     <ClInclude Include="src\Yis\Core\Application.h" />
     <ClInclude Include="src\Yis\Core\Base.h" />
@@ -166,13 +157,23 @@
     <ClInclude Include="src\Yis\Core\Window.h" />
     <ClInclude Include="src\Yis\EntryPoint.h" />
     <ClInclude Include="src\Yis\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLFrameBuffer.h" />
+    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Yis\Platform\OpenGL\OpenGLTexture.h" />
+    <ClInclude Include="src\Yis\Platform\Windows\WindowsInput.h" />
+    <ClInclude Include="src\Yis\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="src\Yis\Renderer\Buffer.h" />
+    <ClInclude Include="src\Yis\Renderer\Camera.h" />
+    <ClInclude Include="src\Yis\Renderer\FrameBuffer.h" />
     <ClInclude Include="src\Yis\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Yis\Renderer\RenderCommandQueue.h" />
     <ClInclude Include="src\Yis\Renderer\Renderer.h" />
     <ClInclude Include="src\Yis\Renderer\RendererAPI.h" />
-    <ClInclude Include="src\Yis\Renderer\Buffer.h" />
-    <ClInclude Include="src\yspch.h" />
+    <ClInclude Include="src\Yis\Renderer\Shader.h" />
     <ClInclude Include="src\Yis\Renderer\Texture.h" />
+    <ClInclude Include="src\yspch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_fixes.hpp" />
@@ -590,28 +591,29 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Yis\Renderer\Camera.cpp" />
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLShader.cpp" />
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLBuffer.cpp" />
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLTexture.cpp" />
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLFrameBuffer.cpp" />
-    <ClCompile Include="src\Yis\Renderer\Shader.cpp" />
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLRendererAPI.cpp" />
-    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLContext.cpp" />
-    <ClCompile Include="src\Yis\Platform\Windows\WindowsInput.cpp" />
-    <ClCompile Include="src\Yis\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\Yis\Renderer\Mesh.cpp" />
     <ClCompile Include="src\Yis\Core\Application.cpp" />
     <ClCompile Include="src\Yis\Core\LayerStack.cpp" />
     <ClCompile Include="src\Yis\Core\Log.cpp" />
     <ClCompile Include="src\Yis\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Yis\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLFrameBuffer.cpp" />
+    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLRendererAPI.cpp" />
+    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Yis\Platform\OpenGL\OpenGLTexture.cpp" />
+    <ClCompile Include="src\Yis\Platform\Windows\WindowsInput.cpp" />
+    <ClCompile Include="src\Yis\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\Yis\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Yis\Renderer\Camera.cpp" />
     <ClCompile Include="src\Yis\Renderer\RenderCommandQueue.cpp" />
     <ClCompile Include="src\Yis\Renderer\Renderer.cpp" />
-    <ClCompile Include="src\Yis\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Yis\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Yis\Renderer\Texture.cpp" />
     <ClCompile Include="src\yspch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Yis\Renderer\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

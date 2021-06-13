@@ -25,6 +25,7 @@ namespace Yis
 	}
 	void OpenGLVertexBuffer::SetData(void* buffer, unsigned int size, unsigned int offset)
 	{
+		m_Size = size;
 		YS_RENDER_S3(buffer, size, offset, {
 				glBindBuffer(GL_ARRAY_BUFFER, self->m_RendererID);
 				glBufferData(GL_ARRAY_BUFFER, size, buffer, GL_STATIC_DRAW);
@@ -63,6 +64,7 @@ namespace Yis
 	}
 	void OpenGLIndexBuffer::SetData(void* buffer, unsigned int size, unsigned int offset)
 	{
+		m_Size = size;
 		YS_RENDER_S3(buffer, size, offset, {
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self->m_RendererID);
 				glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, buffer, GL_STATIC_DRAW);
