@@ -4,12 +4,11 @@
 namespace Yis
 {
 	OpenGLShader::OpenGLShader(const std::string& filepath)
-		:m_AssetPath(filepath)
+		:m_AssetPath(filepath), m_RendererID(0)
 	{
 		size_t found = filepath.find_last_of("/\\");
 		m_Name = found != std::string::npos ? filepath.substr(found + 1) : filepath;
 		Reload();
-
 	}
 	void OpenGLShader::Reload()
 	{
@@ -19,16 +18,18 @@ namespace Yis
 				glDeleteShader(self->m_RendererID);
 
 			self->CompileAndUploadShader();
+			YS_CORE_INFO("Command Reload Shader {0} {1}", self->m_RendererID, self->m_Name);
 			});
-		YS_CORE_INFO("Command Reload Shader {0}",m_Name);
+		
 	}
 
 	void OpenGLShader::Bind()
 	{
 		YS_RENDER_S({
 				glUseProgram(self->m_RendererID);
+				YS_CORE_INFO("Command Shader Bind {0} {1}", self->m_RendererID,self->m_Name);
 			});
-		YS_CORE_INFO("Command Shader Bind");
+		
 	}
 
 	// Read shader code to m_ShaderSource	
@@ -98,7 +99,7 @@ namespace Yis
 				// The maxLength includes the NULL character
 				std::vector<GLchar> infoLog(maxLength);
 				glGetShaderInfoLog(shaderRendererID, maxLength, &maxLength, &infoLog[0]);
-				YS_CORE_ERROR("Shader compilation failed:\n{0}", &infoLog[0]);
+				YS_CORE_ERROR("Shader {1} compilation failed:\n{0}", &infoLog[0],m_Name);
 				// We don't need the shader anymore.
 				glDeleteShader(shaderRendererID);
 
@@ -157,14 +158,27 @@ namespace Yis
 			const UniformDecl& decl = uniformBuffer.GetUniforms()[i];
 			switch (decl.Type)
 			{
+				case UniformType::Int:
+				{
+					const std::string& name = decl.Name;
+					float value = *(int*)(uniformBuffer.GetBuffer() + decl.Offset);
+					YS_RENDER_S2(name, value, {
+						self->UploadUniformInt(name, value);
+						YS_CORE_INFO("Command UploadUniform {0} to shader {1}", name, self->m_Name);
+						});
+
+					break;
+				}
+				
 				case UniformType::Float:
 				{
 					const std::string& name = decl.Name;
 					float value = *(float*)(uniformBuffer.GetBuffer() + decl.Offset);
 					YS_RENDER_S2(name, value, {
 						self->UploadUniformFloat(name, value);
+						YS_CORE_INFO("Command UploadUniform {0} to shader {1}", name, self->m_Name);
 						});
-					YS_CORE_INFO("Command UploadUniformFloat {0}", name);
+					
 					break;
 				}
 				case UniformType::Float3:
@@ -173,8 +187,9 @@ namespace Yis
 					glm::vec3& values = *(glm::vec3*)(uniformBuffer.GetBuffer() + decl.Offset);
 					YS_RENDER_S2(name, values, {
 						self->UploadUniformFloat3(name, values);
+						YS_CORE_INFO("Command UploadUniform {0} to shader {1}", name, self->m_Name);
 						});
-					YS_CORE_INFO("Command UploadUniformFloat {0}", name);
+					
 					break;
 				}
 
@@ -184,8 +199,9 @@ namespace Yis
 					glm::vec4& values = *(glm::vec4*)(uniformBuffer.GetBuffer() + decl.Offset);
 					YS_RENDER_S2(name, values, {
 						self->UploadUniformFloat4(name, values);
+						YS_CORE_INFO("Command UploadUniform {0} to shader {1}", name, self->m_Name);
 						});
-					YS_CORE_INFO("Command UploadUniformFloat4 {0}", name);
+
 					break;
 				}
 				case UniformType::Matrix4x4:
@@ -194,8 +210,9 @@ namespace Yis
 					glm::mat4& values = *(glm::mat4*)(uniformBuffer.GetBuffer() + decl.Offset);
 					YS_RENDER_S2(name, values, {
 						self->UploadUniformMat4(name, values);
+						YS_CORE_INFO("Command UploadUniform {0} to shader {1}", name, self->m_Name);
 						});
-					YS_CORE_INFO("Command UploadUniformFloat4 {0}", name);
+					
 					break;
 				}
 
@@ -254,21 +271,30 @@ namespace Yis
 		else
 			YS_CORE_ERROR("Uniform '{0}' not found!", name);
 	}
+	void OpenGLShader::SetInt(const std::string& name, int value)
+	{
+		YS_RENDER_S2(name, value, {
+			self->UploadUniformInt(name, value);
+			YS_CORE_INFO("Command UploadUniform {0} to shader {1}", name, self->m_Name);
+			});
 
+	}
 	void OpenGLShader::SetFloat(const std::string& name, float value)
 	{
 		YS_RENDER_S2(name, value, {
 			self->UploadUniformFloat(name, value);
+			YS_CORE_INFO("Command UploadUniform {0} to shader {1}", name, self->m_Name);
 			});
-		YS_CORE_INFO("Command UploadUniformFloat {0}", name);
+		
 	}
 
 	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
 	{
 		YS_RENDER_S2(name, value, {
 			self->UploadUniformMat4(name, value);
+			YS_CORE_INFO("Command UploadUniform {0} to shader {1}", name, self->m_Name);
 			});
-		YS_CORE_INFO("Command UploadUniformFloat {0}", name);
+		
 	}
 
 }

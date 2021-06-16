@@ -12,7 +12,7 @@ namespace Yis {
 
 		static void ClearMagenta();
 		static void Init();
-		static void DrawIndexed(unsigned int count);
+		static void DrawIndexed(unsigned int count, bool depthTest = true);
 		static void* Submit(RenderCommandFn fn, unsigned int size)
 		{
 			//s_Instance->m_CommandQueue.Submit(command);
@@ -30,7 +30,6 @@ namespace Yis {
 
 	};
 }
-
 #define YS_RENDER_PASTE2(a, b) a ## b
 #define YS_RENDER_PASTE(a, b) YS_RENDER_PASTE2(a, b)
 #define YS_RENDER_UNIQUE(x) YS_RENDER_PASTE(x, __LINE__)
@@ -87,7 +86,7 @@ namespace Yis {
 		typename ::std::remove_const<typename ::std::remove_reference<decltype(arg1)>::type>::type arg1;\
     };\
 	{\
-		auto mem = ::Hazel::Renderer::Submit(YS_RENDER_UNIQUE(YSRenderCommand)::Execute, sizeof(YS_RENDER_UNIQUE(YSRenderCommand)));\
+		auto mem = ::Yis::Renderer::Submit(YS_RENDER_UNIQUE(YSRenderCommand)::Execute, sizeof(YS_RENDER_UNIQUE(YSRenderCommand)));\
 		new (mem) YS_RENDER_UNIQUE(YSRenderCommand)(arg0, arg1);\
 	}\
 

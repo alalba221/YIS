@@ -31,25 +31,29 @@ public:
 	virtual void OnAttach() override
 	{
         m_Mesh.reset(new Yis::Mesh("assets/models/dinosaur/dinosaur5k.obj"));
-        
-        /*static float vertices[] = {
-             0.0f,  0.0f, 0.0f,
-             0.5f,  0.0f, 0.0f,
-             0.0f,  0.5f, 0.0f
+        m_SimplePBRShader.reset(Yis::Shader::Create("assets/shaders/simplepbr.glsl"));
+        m_HDRShader.reset(Yis::Shader::Create("assets/shaders/hdr.glsl"));
+
+        m_FrameBuffer.reset(Yis::FrameBuffer::Create(1280, 720, Yis::FrameBufferFormat::RGBA8));
+       
+
+
+        // Create Quad
+        float quadVertices[] = { // vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
+        // positions        // texCoords
+        -1.0f, -1.0f,0.0f,  0.0f, 0.0f,
+         1.0f, -1.0f,0.0f,  1.0f, 0.0f,
+         1.0f,  1.0f,0.0f,  1.0f, 1.0f,
+        -1.0f,  1.0f,0.0f,  0.0f, 1.0f
         };
 
-        static unsigned int indices[] = {
-            0, 1, 2
-        };
+        m_VB.reset(Yis::VertexBuffer::Create());
+        m_VB->SetData(quadVertices, sizeof(quadVertices));
 
-        m_VB = std::unique_ptr<Yis::VertexBuffer>(Yis::VertexBuffer::Create());
-        m_VB->SetData(vertices, sizeof(vertices));
+        uint32_t* indices = new uint32_t[6]{ 0, 1, 2, 2, 3, 0};
+        m_IB.reset(Yis::IndexBuffer::Create());
+        m_IB->SetData(indices, 6 * sizeof(unsigned int));
 
-        m_IB = std::unique_ptr<Yis::IndexBuffer>(Yis::IndexBuffer::Create());
-        m_IB->SetData(indices, sizeof(indices));*/
-
-        //auto shader = Yis::Shader::Create("assets/shaders/shader.glsl");
-        m_Shader.reset(Yis::Shader::Create("assets/shaders/shader.glsl"));
 	}
 
 	virtual void OnDetach() override
@@ -58,23 +62,35 @@ public:
 	
 	virtual void OnUpdate() override
 	{
-		
-        ////using namespace Yis;
-        Yis::Renderer::Clear(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
-        
+        YS_APP_INFO("OnUpate");
         m_Camera.Update();
         glm::mat4 viewProjection = m_Camera.GetProjectionMatrix() * m_Camera.GetViewMatrix();
+        
+         // all the command should be pushed into Renderer CommandQueue
+        // first pass
+        m_FrameBuffer->Bind();
+       
+        Yis::Renderer::Clear(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
         Yis::UniformBufferDeclaration<sizeof(glm::mat4) +sizeof(glm::vec4) , 2> simplePbrShaderUB;
         simplePbrShaderUB.Push("u_Color", m_TriangleColor);
         simplePbrShaderUB.Push("u_ViewProjectionMatrix", viewProjection);
-        m_Shader->UploadUniformBuffer(simplePbrShaderUB);
-        m_Shader->Bind();
-        
-        //m_VB->Bind();
-        //m_IB->Bind();
-        //Yis::Renderer::DrawIndexed(3);
+        m_SimplePBRShader->UploadUniformBuffer(simplePbrShaderUB);
+        m_SimplePBRShader->Bind();
         m_Mesh->Render();
+        m_FrameBuffer->Unbind();
 
+        //// second pass
+        Yis::Renderer::Clear(1.0,1.0,1.0,1.0);
+        
+       
+        m_HDRShader->Bind();
+        m_HDRShader->SetInt("u_Texture", 0);
+      
+        
+        m_VB->Bind();
+        m_IB->Bind();
+        m_FrameBuffer->BindTexture();
+        Yis::Renderer::DrawIndexed(m_IB->GetCount(),false);
 	}
 
 	virtual void OnImGuiRender() override
@@ -87,6 +103,12 @@ public:
 		ImGui::ColorEdit4("Clear Color", m_ClearColor);
         ImGui::ColorEdit4("Triangle Color", glm::value_ptr(m_TriangleColor));
 		ImGui::End();
+        /*ImGui::Begin("Viewport");
+        auto viewportSize = ImGui::GetContentRegionAvail();
+      
+        ImGui::Image((void*)m_FrameBuffer->GetColorAttachmentRendererID(), viewportSize, { 0, 1 }, { 1, 0 });
+        ImGui::End();*/
+
 //#if ENABLE_DOCKSPACE
         static bool p_open = true;
         static bool opt_fullscreen = false;
@@ -188,7 +210,10 @@ public:
 private:
     std::unique_ptr<Yis::VertexBuffer> m_VB;
     std::unique_ptr<Yis::IndexBuffer> m_IB;
-    std::unique_ptr<Yis::Shader> m_Shader;
+    std::unique_ptr<Yis::FrameBuffer> m_FrameBuffer;
+
+    std::unique_ptr<Yis::Shader> m_SimplePBRShader;
+    std::unique_ptr<Yis::Shader> m_HDRShader;
     Yis::Camera m_Camera;
     std::unique_ptr<Yis::Mesh> m_Mesh;
 	float m_ClearColor[4];
@@ -242,7 +267,7 @@ public:
 	Sandbox() 
 	{
 		PushLayer(new EditorLayer());
-		//PushOverLay(new Yis:: ImGuiLayer());
+		
 	};
 	~Sandbox() {};
 };

@@ -36,7 +36,7 @@ namespace Yis {
 		std::unique_ptr<IndexBuffer> m_IndexBuffer;
 
 		std::string m_FilePath;
-
+		
 	};
 }
 

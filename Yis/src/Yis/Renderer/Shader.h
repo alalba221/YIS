@@ -15,6 +15,7 @@ namespace Yis
 	enum class UniformType
 	{
 		None = 0,
+		Int,
 		Float, Float2, Float3, Float4,
 		Matrix3x3, Matrix4x4,
 		Int32, Uint32
@@ -60,7 +61,13 @@ namespace Yis
 
 		template<typename T>
 		void Push(const std::string& name, const T& data) {}
-
+		template<>
+		void Push(const std::string& name, const int& data)
+		{
+			Uniforms[Index++] = { UniformType::Int, Cursor, name };
+			memcpy(Buffer + Cursor, &data, sizeof(int));
+			Cursor += sizeof(int);
+		}
 		template<>
 		void Push(const std::string& name, const float& data)
 		{
@@ -105,6 +112,7 @@ namespace Yis
 
 
 		// Temporary while we don't have materials
+		virtual void SetInt(const std::string& name, int value) = 0;
 		virtual void SetFloat(const std::string& name, float value) = 0;
 		virtual void SetMat4(const std::string& name, const glm::mat4& value) = 0;
 

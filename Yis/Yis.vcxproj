@@ -166,7 +166,6 @@
     <ClInclude Include="src\Yis\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Yis\Renderer\Buffer.h" />
     <ClInclude Include="src\Yis\Renderer\Camera.h" />
-    <ClInclude Include="src\Yis\Renderer\FrameBuffer.h" />
     <ClInclude Include="src\Yis\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Yis\Renderer\RenderCommandQueue.h" />
     <ClInclude Include="src\Yis\Renderer\Renderer.h" />
@@ -591,6 +590,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Yis\Renderer\FrameBuffer.cpp" />
     <ClCompile Include="src\Yis\Renderer\Mesh.cpp" />
     <ClCompile Include="src\Yis\Core\Application.cpp" />
     <ClCompile Include="src\Yis\Core\LayerStack.cpp" />

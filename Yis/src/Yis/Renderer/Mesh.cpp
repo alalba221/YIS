@@ -43,6 +43,7 @@ namespace Yis
 	Mesh::Mesh(const std::string& filename)
 		: m_FilePath(filename)
 	{
+		
 		LogStream::Initialize();
 
 		YS_CORE_INFO("Loading mesh: {0}", filename.c_str());
@@ -100,6 +101,7 @@ namespace Yis
 	void Mesh::Render()
 	{
 		// TODO: Sort this out
+
 		m_VertexBuffer->Bind();
 		m_IndexBuffer->Bind();
 		YS_RENDER_S({
@@ -117,6 +119,8 @@ namespace Yis
 
 			glEnableVertexAttribArray(4);
 			glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void*)offsetof(Vertex, Texcoord));
+			
+			YS_CORE_INFO("Command In Mesh::Render");
 			});
 		Renderer::DrawIndexed(m_IndexBuffer->GetCount());
 	}

@@ -126,9 +126,6 @@
     <ClInclude Include="src\Yis\Renderer\Camera.h">
       <Filter>src\Yis\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Yis\Renderer\FrameBuffer.h">
-      <Filter>src\Yis\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="src\Yis\Renderer\GraphicsContext.h">
       <Filter>src\Yis\Renderer</Filter>
     </ClInclude>
@@ -1396,6 +1393,7 @@
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
     <ClInclude Include="src\Yis\Renderer\Mesh.h" />
+    <ClInclude Include="src\Yis\Renderer\FrameBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Yis\Core\Application.cpp">
@@ -1459,5 +1457,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Yis\Renderer\Mesh.cpp" />
+    <ClCompile Include="src\Yis\Renderer\FrameBuffer.cpp" />
   </ItemGroup>
 </Project>

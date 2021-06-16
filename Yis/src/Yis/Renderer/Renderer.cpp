@@ -7,13 +7,15 @@ namespace Yis {
 
 	void Renderer::Init()
 	{
-		YS_RENDER({ RendererAPI::Init(); });
-		YS_CORE_INFO("Command Renderer::Init");
+		YS_RENDER({ RendererAPI::Init(); YS_CORE_INFO("Command Renderer::Init"); });
+		
 	}
-	void Renderer::DrawIndexed(unsigned int count)
+	void Renderer::DrawIndexed(unsigned int count, bool depthTest)
 	{
-		YS_RENDER_1(count, { RendererAPI::DrawIndexed(count); });
+		YS_RENDER_2(count, depthTest, { RendererAPI::DrawIndexed(count, depthTest);
 		YS_CORE_INFO("Command Renderer::DrawIndexed");
+			});
+		
 	}
 	void Renderer::Clear()
 	{
@@ -25,8 +27,9 @@ namespace Yis {
 		
 		YS_RENDER_4(r, g, b, a, {
 			RendererAPI::Clear(r, g, b, a);
+			YS_CORE_INFO("Command Renderer Clear");
 			});
-		YS_CORE_INFO("Command Renderer Clear");
+		
 	}
 
 	void Renderer::ClearMagenta()
@@ -36,7 +39,6 @@ namespace Yis {
 
 	void Renderer::SetClearColor(float r, float g, float b, float a)
 	{
-		// HZ_RENDER(SetClearColor(r, g, b, a));
 	}
 
 	void Renderer::WaitAndRender()

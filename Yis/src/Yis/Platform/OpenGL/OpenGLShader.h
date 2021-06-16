@@ -14,6 +14,7 @@ namespace Yis
 		virtual void UploadUniformBuffer(const UniformBufferBase& uniformBuffer) override;
 
 		virtual void SetFloat(const std::string& name, float value) override;
+		virtual void SetInt(const std::string& name, int value) override;
 		virtual void SetMat4(const std::string& name, const glm::mat4& value) override;
 
 		virtual const std::string& GetName() const override { return m_Name; }

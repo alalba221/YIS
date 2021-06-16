@@ -117,12 +117,15 @@ namespace Yis {
 			for (Layer* layer : m_LayerStack)
 			{
 				auto [x, y] = Input::GetMousePosition();
-				YS_CORE_ERROR("{0},{1}", x, y);
+				
 				layer->OnUpdate();
 			}
 			Application* app = this;
-			YS_RENDER_1(app, { app->RenderImGui(); });
-			YS_CORE_INFO("Command Application RenderImGui");
+			YS_RENDER_1(app, { 
+				app->RenderImGui(); 
+				YS_CORE_INFO("Command Application RenderImGui"); 
+			});
+			
 			Renderer::Get().WaitAndRender();
 			
 			//RenderImGui();
