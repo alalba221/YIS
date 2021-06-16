@@ -33,6 +33,42 @@ namespace Yis
 				glBufferData(GL_ARRAY_BUFFER, size, buffer, GL_STATIC_DRAW);
 				YS_CORE_INFO("Command OpenGLVertexBuffer {0} SetData", self->m_RendererID);
 			});
+		/// Above Macro can be replaced with following code, since pass a pointer (buffer) to the function, the array should be static
+		//auto self = this;
+		//struct YSRenderCommand39 
+		//{
+		//	YSRenderCommand39(OpenGLVertexBuffer* arg0, 
+		//		void* arg1, 
+		//		unsigned int arg2, 
+		//		unsigned int arg3)
+		//	: arg0(arg0), arg1(arg1), arg2(arg2), arg3(arg3) {
+		//		
+		//	}
+		//	
+		//	static void Execute(void* argBuffer)
+		//	{
+		//		auto& arg0 = ((YSRenderCommand39*)argBuffer)->arg0;
+		//		auto& arg1 = ((YSRenderCommand39*)argBuffer)->arg1;
+		//		auto& arg2 = ((YSRenderCommand39*)argBuffer)->arg2;
+		//		auto& arg3 = ((YSRenderCommand39*)argBuffer)->arg3;
+
+		//		glBindBuffer(GL_ARRAY_BUFFER, arg0->m_RendererID);
+		//		glBufferData(GL_ARRAY_BUFFER, arg2, arg1, GL_STATIC_DRAW);
+		//		YS_CORE_INFO("Command OpenGLVertexBuffer {0} SetData", arg0->m_RendererID);
+		//	}
+		//	
+		//	OpenGLVertexBuffer* arg0;
+		//	void* arg1;
+		//	unsigned int arg2;
+		//	unsigned int arg3;
+		//}; 
+		//{
+		//	
+		//	YSRenderCommand39* mem = (YSRenderCommand39*)Renderer::Submit(YSRenderCommand39::Execute, sizeof(YSRenderCommand39));
+		//	
+		//	new (mem) YSRenderCommand39(self, buffer, size, offset); 
+		//	YS_CORE_ERROR("TEST {0} {1} {2}", ((float*)(mem->arg1))[0], mem->arg2, mem->arg3);
+		//}
 	}
 	void OpenGLVertexBuffer::Bind() const
 	{
