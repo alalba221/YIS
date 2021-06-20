@@ -33,12 +33,16 @@ public:
         m_Mesh.reset(new Yis::Mesh("assets/models/dinosaur/dinosaur5k.obj"));
         m_SimplePBRShader.reset(Yis::Shader::Create("assets/shaders/simplepbr.glsl"));
         m_HDRShader.reset(Yis::Shader::Create("assets/shaders/hdr.glsl"));
+        m_QuadShader.reset(Yis::Shader::Create("assets/shaders/skybox.glsl"));
+        
 
+        m_EnvironmentCubeMap.reset(Yis::TextureCube::Create("assets/textures/environments/Arches_E_PineTree_Radiance.tga"));
         m_FrameBuffer.reset(Yis::FrameBuffer::Create(1280, 720, Yis::FrameBufferFormat::RGBA8));
        
 
 
         // Create Quad
+         // Create Quad
         static float quadVertices[] = { // vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
         // positions        // texCoords
         -1.0f, -1.0f,0.0f,  0.0f, 0.0f,
@@ -50,10 +54,50 @@ public:
         m_VB.reset(Yis::VertexBuffer::Create());
         m_VB->SetData(quadVertices, sizeof(quadVertices));
 
-        uint32_t* indices = new uint32_t[6]{ 0, 1, 2, 2, 3, 0};
+        uint32_t* indices = new uint32_t[6]{ 0, 1, 2, 2, 3, 0 };
         m_IB.reset(Yis::IndexBuffer::Create());
         m_IB->SetData(indices, 6 * sizeof(unsigned int));
 
+
+
+
+        // Create Sky box
+        static float skyboxVertices[] = {
+            // positions          // unused index since vectex Bind function need it
+            -1.0f, -1.0f,  1.0f,          1.0f,0.0f,  
+             1.0f, -1.0f,  1.0f,          1.0f,0.0f,
+             1.0f,  1.0f,  1.0f,          1.0f,0.0f,
+            -1.0f,  1.0f,  1.0f,          1.0f,0.0f,
+                                          
+            -1.0f, -1.0f, -1.0f,          1.0f,0.0f,
+             1.0f, -1.0f, -1.0f,          1.0f,0.0f,
+             1.0f,  1.0f, -1.0f,          1.0f,0.0f,
+            -1.0f,  1.0f, -1.0f,          1.0f,0.0f
+        };
+        m_SkyBoxVB.reset(Yis::VertexBuffer::Create());
+        m_SkyBoxVB->SetData(skyboxVertices, sizeof(skyboxVertices));
+
+        uint32_t* SkyBoxindices = new uint32_t[36]{ // front
+        0, 1, 2,
+        2, 3, 0,
+        // right
+        1, 5, 6,
+        6, 2, 1,
+        // back
+        7, 6, 5,
+        5, 4, 7,
+        // left
+        4, 0, 3,
+        3, 7, 4,
+        // bottom
+        4, 5, 1,
+        1, 0, 4,
+        // top
+        3, 2, 6,
+        6, 7, 3 };
+
+        m_SkyBoxIB.reset(Yis::IndexBuffer::Create());
+        m_SkyBoxIB->SetData(SkyBoxindices, 36 * sizeof(unsigned int));
 	}
 
 	virtual void OnDetach() override
@@ -71,22 +115,34 @@ public:
         m_FrameBuffer->Bind();
        
         Yis::Renderer::Clear(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
+       
         Yis::UniformBufferDeclaration<sizeof(glm::mat4) +sizeof(glm::vec4) , 2> simplePbrShaderUB;
         simplePbrShaderUB.Push("u_Color", m_TriangleColor);
         simplePbrShaderUB.Push("u_ViewProjectionMatrix", viewProjection);
         m_SimplePBRShader->UploadUniformBuffer(simplePbrShaderUB);
         m_SimplePBRShader->Bind();
         m_Mesh->Render();
-        m_FrameBuffer->Unbind();
+        
+        // skybox
+        Yis::Renderer::SetDepthTest(Yis::RendererAPIDepthTestType::Lequal);
+        Yis::UniformBufferDeclaration<sizeof(glm::mat4) + sizeof(unsigned int), 2> SkyBoxShaderUB;
+        SkyBoxShaderUB.Push("u_ViewProjectionMatrix", m_Camera.GetProjectionMatrix() *
+            glm::mat4(glm::mat3(m_Camera.GetViewMatrix())));
+        SkyBoxShaderUB.Push("u_Texture", 0);
+        m_QuadShader->UploadUniformBuffer(SkyBoxShaderUB);
+        m_QuadShader->Bind();
 
+        m_EnvironmentCubeMap->Bind();
+        m_SkyBoxVB->Bind();
+        m_SkyBoxIB->Bind();
+        Yis::Renderer::DrawIndexed(36, true);
+        Yis::Renderer::SetDepthTest(Yis::RendererAPIDepthTestType::Less);
+        m_FrameBuffer->Unbind();
+       
         //// second pass
         Yis::Renderer::Clear(1.0,1.0,1.0,1.0);
-        
-       
         m_HDRShader->Bind();
         m_HDRShader->SetInt("u_Texture", 0);
-      
-        
         m_VB->Bind();
         m_IB->Bind();
         m_FrameBuffer->BindTexture();
@@ -210,10 +266,17 @@ public:
 private:
     std::unique_ptr<Yis::VertexBuffer> m_VB;
     std::unique_ptr<Yis::IndexBuffer> m_IB;
+    std::unique_ptr<Yis::VertexBuffer> m_SkyBoxVB;
+    std::unique_ptr<Yis::IndexBuffer> m_SkyBoxIB;
+
     std::unique_ptr<Yis::FrameBuffer> m_FrameBuffer;
 
     std::unique_ptr<Yis::Shader> m_SimplePBRShader;
     std::unique_ptr<Yis::Shader> m_HDRShader;
+
+    std::unique_ptr<Yis::Shader> m_QuadShader;
+    std::unique_ptr<Yis::TextureCube> m_EnvironmentCubeMap;
+
     Yis::Camera m_Camera;
     std::unique_ptr<Yis::Mesh> m_Mesh;
 	float m_ClearColor[4];

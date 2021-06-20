@@ -16,7 +16,7 @@ namespace Yis {
 		m_RotationSpeed = 0.002f;
 		m_ZoomSpeed = 0.2f;
 
-		m_Position = { 0, 0, -10 };
+		m_Position = { 0, 0, -10};
 		m_Rotation = glm::vec3(0.0f, 0.0f, 0.0f);
 
 		m_FocalPoint = glm::vec3(0.0f);
@@ -50,7 +50,8 @@ namespace Yis {
 
 		glm::quat orientation = GetOrientation();
 		m_Rotation = glm::eulerAngles(orientation) * (180.0f / (float)M_PI);
-		m_ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 1)) * glm::toMat4(glm::conjugate(orientation)) * glm::translate(glm::mat4(1.0f), -m_Position);
+		//m_ViewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 1)) * glm::toMat4(glm::conjugate(orientation)) * glm::translate(glm::mat4(1.0f), -m_Position);
+		m_ViewMatrix = glm::toMat4(glm::conjugate(orientation)) * glm::translate(glm::mat4(1.0f), -m_Position);
 		//m_ViewMatrix = glm::lookAt(m_Position, m_FocalPoint, glm::vec3(0.0f, 1.0f, 0.0f));
 	}
 

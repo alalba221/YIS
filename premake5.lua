@@ -56,6 +56,7 @@ project "Yis"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
+		"%{prj.name}/vendor/stb/include",
 		"%{prj.name}/vendor/assimp/include"
 	}
 	links 

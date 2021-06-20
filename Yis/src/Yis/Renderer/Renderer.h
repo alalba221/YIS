@@ -19,6 +19,8 @@ namespace Yis {
 			return s_Instance->m_CommandQueue.Allocate(fn, size);
 		}
 
+		static void SetDepthTest(RendererAPIDepthTestType type);
+
 		void WaitAndRender();
 
 		inline static Renderer& Get() { return *s_Instance; }

@@ -45,5 +45,10 @@ namespace Yis {
 	{
 		s_Instance->m_CommandQueue.Execute();
 	}
-
+	void Renderer::SetDepthTest(RendererAPIDepthTestType type) {
+		YS_RENDER_1(type, {
+			RendererAPI::SetDepthTest(type);
+			YS_CORE_INFO("Command  Set Depth test to {0}", type);
+		});
+	}
 }
