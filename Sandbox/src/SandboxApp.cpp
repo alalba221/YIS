@@ -116,9 +116,10 @@ public:
        
         Yis::Renderer::Clear(m_ClearColor[0], m_ClearColor[1], m_ClearColor[2], m_ClearColor[3]);
        
-        Yis::UniformBufferDeclaration<sizeof(glm::mat4) +sizeof(glm::vec4) , 2> simplePbrShaderUB;
+        Yis::UniformBufferDeclaration<sizeof(glm::mat4) + sizeof(glm::vec3)+sizeof(unsigned int), 3> simplePbrShaderUB;
         simplePbrShaderUB.Push("u_Color", m_TriangleColor);
         simplePbrShaderUB.Push("u_ViewProjectionMatrix", viewProjection);
+        simplePbrShaderUB.Push("u_CameraPosition", m_Camera.GetPosition());
         m_SimplePBRShader->UploadUniformBuffer(simplePbrShaderUB);
         m_SimplePBRShader->Bind();
         m_Mesh->Render();
